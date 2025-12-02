@@ -1,0 +1,9 @@
+{
+  "project_name": "gwt",
+  "language_servers": ["vtsls", "json-language-server"],
+  "languages": {
+    "JSON": {
+      "format_on_save": "on"
+    }
+  }
+}
