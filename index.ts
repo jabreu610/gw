@@ -1,11 +1,19 @@
 import createCli from "cac";
-import { $ } from "bun";
 
-const cli = createCli("gwt");
+import { runWorktreeAdd } from "./commands/add";
+
+const cli = createCli("gw");
+
 cli
-  .command("ls", "placeholder command, lists current working directory files")
-  .action(async () => {
-    await $`ls`;
+  .command("add <path>", "Create a new worktree at path")
+  .option(
+    "-b <branch>",
+    "Create a new branch, if not provided will derive from path",
+  )
+  .option("-B <branch>", "Create or reset a branch")
+  .option("-n, --dryRun", "Do not execute commands, just prints commands.")
+  .action(async (path, options) => {
+    await runWorktreeAdd(path, options);
   });
 
 cli.help();
