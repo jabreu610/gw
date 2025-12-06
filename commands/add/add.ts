@@ -24,9 +24,17 @@ export async function runWorktreeAdd(path: string, options: AddOptions) {
       args.push("-b", derivedBranch);
     }
   }
-  if (dryRun) {
-    console.log(`Running: git worktree add ${args.join(" ")}`);
-  } else {
-    await $`git worktree add ${args}`;
+  try {
+    if (dryRun) {
+      console.log(`Running: git worktree add ${args.join(" ")}`);
+    } else {
+      await $`git worktree add ${args}`;
+    }
+  } catch (error) {
+    if (error instanceof $.ShellError) {
+      console.error(`Unable to add worktree: ${error}`);
+    }
+    throw error;
+    process.exit(1);
   }
 }
