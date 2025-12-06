@@ -1,3 +1,4 @@
+#!/usr/bin/env bun
 import createCli from "cac";
 
 import { runWorktreeAdd } from "./commands/add";

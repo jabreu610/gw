@@ -1,8 +1,11 @@
 {
-  "name": "init-bun",
+  "name": "gw",
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "bin": {
+    "gw": "./index.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
