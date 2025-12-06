@@ -27,6 +27,6 @@ export async function runWorktreeAdd(path: string, options: AddOptions) {
   if (dryRun) {
     console.log(`Running: git worktree add ${args.join(" ")}`);
   } else {
-    await $`git worktree add ${{ raw: args.join(" ") }}`;
+    await $`git worktree add ${args}`;
   }
 }
