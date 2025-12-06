@@ -12,7 +12,7 @@ cli
     "Create a new branch, if not provided will derive from path",
   )
   .option("-B <branch>", "Create or reset a branch")
-  .option("-n, --dryRun", "Do not execute commands, just prints commands.")
+  .option("-n, --dry-run", "Do not execute commands, just prints commands.")
   .action(async (path, options) => {
     await runWorktreeAdd(path, options);
   });
