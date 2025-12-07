@@ -33,8 +33,8 @@ export async function runWorktreeAdd(path: string, options: AddOptions) {
   } catch (error) {
     if (error instanceof $.ShellError) {
       console.error(`Unable to add worktree: ${error}`);
+      process.exit(1);
     }
     throw error;
-    process.exit(1);
   }
 }
