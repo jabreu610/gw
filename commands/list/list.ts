@@ -27,10 +27,16 @@ export async function runWorktreeList(options: ListOptions) {
     }
     const groups: BranchGroup[] = [];
     for await (let ln of $`git worktree list`.lines()) {
+      if (!ln) continue;
       const match = ln.match(
         /^(?<path>.+?)\s+(?<hash>[0-9a-f]+)?\s?(?:\((?<bare>.*)\))?(?:\[(?<branch>.+)\])?$/,
       );
-      const { path, bare, hash, branch } = match?.groups ?? {};
+      if (!match || !match.groups) {
+        const group = getGroup(groups, "unknown");
+        group.lines.push({ raw: ln });
+        continue;
+      }
+      const { path, bare, hash, branch } = match.groups;
       if (bare && path) {
         const group = getGroup(groups, "bare");
         group.lines.push({ path, bare });
@@ -45,17 +51,21 @@ export async function runWorktreeList(options: ListOptions) {
     groups.sort((a, b) => {
       if (a.name === "bare") return -1;
       if (b.name === "bare") return 1;
+      if (a.name === "unknown") return 1;
+      if (b.name === "unknown") return -1;
       return a.name.localeCompare(b.name);
     });
     for (const section of groups) {
       const { name, lines } = section;
       console.log(`${pc.bold(name)} ${lines.length}`);
       for (const line of lines) {
-        const { path, bare, hash, branch } = line;
+        const { path, bare, hash, branch, raw } = line;
         if (path && bare) {
           console.log(`${pc.dim(path)} ${pc.blue(bare)}`);
         } else if (path && hash && branch) {
           console.log(`${pc.dim(path)} ${pc.blue(hash)} ${pc.yellow(branch)}`);
+        } else {
+          console.log(`${raw}`);
         }
       }
       console.log("");
