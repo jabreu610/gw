@@ -44,7 +44,7 @@ export async function runWorktreeList(options: ListOptions) {
     }
     for (const section of groups) {
       const { name, lines } = section;
-      console.log(pc.bold(name));
+      console.log(`${pc.bold(name)} ${lines.length}`);
       for (const line of lines) {
         const { path, bare, hash, branch } = line;
         if (path && bare) {
