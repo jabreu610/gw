@@ -25,11 +25,7 @@ export async function runWorktreeAdd(path: string, options: AddOptions) {
     }
   }
   try {
-    if (dryRun) {
-      console.log(`Running: git worktree add ${args.join(" ")}`);
-    } else {
-      await addWorktree(args);
-    }
+    await addWorktree(args, dryRun);
   } catch (error) {
     if (error instanceof $.ShellError) {
       console.error(`Unable to add worktree: ${error}`);

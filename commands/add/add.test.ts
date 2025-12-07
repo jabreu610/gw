@@ -15,7 +15,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../path/to/worktree", { ...options, n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../path/to/worktree -b my-feature"
+      "dryrun: git worktree add ../path/to/worktree -b my-feature",
     );
   });
 
@@ -27,7 +27,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../path/to/worktree", { ...options, n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../path/to/worktree -B force-branch"
+      "dryrun: git worktree add ../path/to/worktree -B force-branch",
     );
   });
 
@@ -38,7 +38,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../feature/add-command", { n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../feature/add-command -b feature/add-command"
+      "dryrun: git worktree add ../feature/add-command -b feature/add-command",
     );
   });
 
@@ -49,7 +49,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../some/path/bugfix/fix-issue", { n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../some/path/bugfix/fix-issue -b bugfix/fix-issue"
+      "dryrun: git worktree add ../some/path/bugfix/fix-issue -b bugfix/fix-issue",
     );
   });
 
@@ -60,7 +60,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../hotfix/critical-bug", { n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../hotfix/critical-bug -b hotfix/critical-bug"
+      "dryrun: git worktree add ../hotfix/critical-bug -b hotfix/critical-bug",
     );
   });
 
@@ -71,7 +71,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../release/v1.0.0", { n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../release/v1.0.0 -b release/v1.0.0"
+      "dryrun: git worktree add ../release/v1.0.0 -b release/v1.0.0",
     );
   });
 
@@ -82,7 +82,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../random/path", { n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../random/path"
+      "dryrun: git worktree add ../random/path",
     );
   });
 
@@ -94,7 +94,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../feature/something", { ...options, n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../feature/something -b explicit-branch"
+      "dryrun: git worktree add ../feature/something -b explicit-branch",
     );
   });
 
@@ -106,7 +106,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../path", { ...options, n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../path -B branch-B"
+      "dryrun: git worktree add ../path -B branch-B",
     );
   });
 
@@ -117,7 +117,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../feature/../feature/test", { n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../feature/../feature/test -b feature/test"
+      "dryrun: git worktree add ../feature/../feature/test -b feature/test",
     );
   });
 
@@ -128,7 +128,7 @@ describe("runWorktreeAdd", () => {
     await runWorktreeAdd("../feature/module/subfeature", { n: true });
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../feature/module/subfeature -b feature/module/subfeature"
+      "dryrun: git worktree add ../feature/module/subfeature -b feature/module/subfeature",
     );
   });
 
@@ -140,7 +140,7 @@ describe("runWorktreeAdd", () => {
 
     expect(consoleSpy).toHaveBeenCalledTimes(1);
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Running: git worktree add ../feature/test -b feature/test"
+      "dryrun: git worktree add ../feature/test -b feature/test",
     );
   });
 });

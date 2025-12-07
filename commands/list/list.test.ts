@@ -22,8 +22,11 @@ describe("runWorktreeList", () => {
 
     await runWorktreeList(options);
 
-    expect(consoleSpy).toHaveBeenCalledWith("Running: git worktree list");
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
+    expect(consoleSpy).toHaveBeenCalledWith(
+      "dryrun: git branch --show-current",
+    );
+    expect(consoleSpy).toHaveBeenCalledWith("dryrun: git worktree list");
+    expect(consoleSpy).toHaveBeenCalledTimes(2);
   });
 
   test("lists single worktree with branch", async () => {

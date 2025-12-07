@@ -8,8 +8,18 @@ export const mockState = {
 
 // Mock the shell wrapper module before any other modules import it
 mock.module("./list.shell", () => ({
-  getCurrentBranch: async () => mockState.currentBranch,
-  getWorktreeList: async function* () {
+  getCurrentBranch: async (dryRun = false) => {
+    if (dryRun) {
+      console.log("dryrun: git branch --show-current");
+      return "";
+    }
+    return mockState.currentBranch;
+  },
+  getWorktreeList: async function* (dryRun = false) {
+    if (dryRun) {
+      console.log("dryrun: git worktree list");
+      return;
+    }
     for (const line of mockState.worktreeOutput) {
       yield line;
     }

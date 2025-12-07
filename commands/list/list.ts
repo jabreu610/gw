@@ -22,13 +22,9 @@ function getGroup(groups: BranchGroup[], name: string) {
 
 export async function runWorktreeList(options: ListOptions) {
   try {
-    if (options.dryRun) {
-      console.log("Running: git worktree list");
-      return;
-    }
-    const currentBranch = await getCurrentBranch();
+    const currentBranch = await getCurrentBranch(options.dryRun);
     const groups: BranchGroup[] = [];
-    for await (let ln of getWorktreeList()) {
+    for await (let ln of getWorktreeList(options.dryRun)) {
       if (!ln) continue;
       const match = ln.match(
         /^(?<path>.+?)\s+(?<hash>[0-9a-f]+)?\s?(?:\((?<bare>.*)\))?(?:\[(?<branch>.+)\])?$/,

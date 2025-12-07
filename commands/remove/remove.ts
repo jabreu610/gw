@@ -9,11 +9,7 @@ export async function runWorktreeRemove(path: string, options: RemoveOptions) {
     args.push("-f");
   }
   try {
-    if (dryRun) {
-      console.log(`Running: git worktree remove ${args.join(" ")}`);
-    } else {
-      await removeWorktree(args);
-    }
+    await removeWorktree(args, dryRun);
   } catch (error) {
     if (error instanceof $.ShellError) {
       console.error(`Unable to remove worktree: ${error}`);
