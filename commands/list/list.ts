@@ -42,6 +42,11 @@ export async function runWorktreeList(options: ListOptions) {
         group.lines.push({ path, hash, branch });
       }
     }
+    groups.sort((a, b) => {
+      if (a.name === "bare") return -1;
+      if (b.name === "bare") return 1;
+      return a.name.localeCompare(b.name);
+    });
     for (const section of groups) {
       const { name, lines } = section;
       console.log(`${pc.bold(name)} ${lines.length}`);
