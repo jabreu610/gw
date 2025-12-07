@@ -73,6 +73,32 @@ Main 1
    /path/to/main 9876543 main
 ```
 
+### Remove Command
+
+Remove a Git worktree at the specified path:
+
+```bash
+gw remove <path>
+```
+
+**Options:**
+
+- `-f, --force` - Force removal even if worktree is dirty or locked
+- `-n, --dry-run` - Print command without executing it
+
+**Examples:**
+
+```bash
+# Remove a worktree
+gw remove ../feature/old-feature
+
+# Force remove a worktree with uncommitted changes
+gw remove ../bugfix/temp -f
+
+# Dry run to see what would be executed
+gw remove ../feature/test --dry-run
+```
+
 ## Development
 
 This project uses [Bun](https://bun.sh) as its runtime.
