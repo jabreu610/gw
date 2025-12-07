@@ -8,7 +8,7 @@ describe("runWorktreeList", () => {
   });
 
   test("dry run prints command without executing", async () => {
-    const options: ListOptions = { dryRun: "true" };
+    const options: ListOptions = { dryRun: true };
     const consoleSpy = mock(() => {});
     console.log = consoleSpy;
 

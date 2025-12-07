@@ -1,4 +1,4 @@
 export type ListOptions = {
-  n?: string;
-  dryRun?: string;
+  n?: boolean;
+  dryRun?: boolean;
 };
