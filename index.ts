@@ -3,6 +3,7 @@ import createCli from "cac";
 
 import { runWorktreeAdd } from "./commands/add";
 import { runWorktreeList } from "./commands/list";
+import { runWorktreeRemove } from "./commands/remove";
 
 const cli = createCli("gw");
 
@@ -22,6 +23,13 @@ cli
 cli.command("list", "Get a list of worktrees").action(async (options) => {
   await runWorktreeList(options);
 });
+
+cli
+  .command("remove <path>", "Remove worktree at provided path")
+  .option("-f", "Force removal")
+  .action(async (path, options) => {
+    await runWorktreeRemove(path, options);
+  });
 
 cli.help();
 cli.version("0.0.0");
