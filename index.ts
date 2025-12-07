@@ -5,6 +5,8 @@ import { runWorktreeAdd } from "./commands/add";
 
 const cli = createCli("gw");
 
+cli.option("-n, --dry-run", "Do not execute commands, just prints commands");
+
 cli
   .command("add <path>", "Create a new worktree at path")
   .option(
@@ -12,7 +14,6 @@ cli
     "Create a new branch, if not provided will derive from path",
   )
   .option("-B <branch>", "Create or reset a branch")
-  .option("-n, --dry-run", "Do not execute commands, just prints commands.")
   .action(async (path, options) => {
     await runWorktreeAdd(path, options);
   });
