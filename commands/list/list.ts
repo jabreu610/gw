@@ -9,13 +9,14 @@ export async function runWorktreeList(options: ListOptions) {
       return;
     }
     for await (let ln of $`git worktree list`.lines()) {
-      const parts = ln.split(" ").filter((s) => s.length > 0);
-      if (parts.length > 0 && parts.length < 3) {
-        console.log(`${pc.dim(parts[0])} ${pc.yellow(parts[1])}`);
-      } else if (parts.length > 0) {
-        console.log(
-          `${pc.dim(parts[0])} ${pc.blue(parts[1])} ${pc.yellow(parts[2])}`,
-        );
+      const match = ln.match(
+        /^(?<path>.+?)\s+(?<hash>[0-9a-f]+)?\s?(?:\((?<bare>.*)\))?(?:\[(?<branch>.+)\])?$/,
+      );
+      const { path, bare, hash, branch } = match?.groups ?? {};
+      if (path && bare) {
+        console.log(`${pc.dim(path)} ${pc.yellow(bare)}`);
+      } else if (path && hash && branch) {
+        console.log(`${pc.dim(path)} ${pc.blue(hash)} ${pc.yellow(branch)}`);
       }
     }
   } catch (error) {
