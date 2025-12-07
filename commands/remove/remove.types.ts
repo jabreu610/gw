@@ -1,5 +1,5 @@
 export type RemoveOptions = {
-  f: boolean;
-  n: boolean;
-  dryRun: boolean;
+  f?: boolean;
+  n?: boolean;
+  dryRun?: boolean;
 };
