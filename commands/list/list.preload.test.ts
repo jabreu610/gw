@@ -7,7 +7,7 @@ export const mockState = {
 };
 
 // Mock the shell wrapper module before any other modules import it
-mock.module("./shell", () => ({
+mock.module("./list.shell", () => ({
   getCurrentBranch: async () => mockState.currentBranch,
   getWorktreeList: async function* () {
     for (const line of mockState.worktreeOutput) {

@@ -1,4 +1,4 @@
-import { $ } from "bun";
+import { removeWorktree, $ } from "./remove.shell";
 import type { RemoveOptions } from "./remove.types";
 
 export async function runWorktreeRemove(path: string, options: RemoveOptions) {
@@ -12,7 +12,7 @@ export async function runWorktreeRemove(path: string, options: RemoveOptions) {
     if (dryRun) {
       console.log(`Running: git worktree remove ${args.join(" ")}`);
     } else {
-      await $`git worktree remove ${args}`;
+      await removeWorktree(args);
     }
   } catch (error) {
     if (error instanceof $.ShellError) {

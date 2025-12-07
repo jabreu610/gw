@@ -2,7 +2,7 @@ import pc from "picocolors";
 import startCase from "lodash.startcase";
 import type { ListOptions } from "./list.types";
 import { BRANCH_PREFIXES } from "./list.constants";
-import { getCurrentBranch, getWorktreeList, $ } from "./shell";
+import { getCurrentBranch, getWorktreeList, $ } from "./list.shell";
 
 const prefixSet = new Set(BRANCH_PREFIXES);
 

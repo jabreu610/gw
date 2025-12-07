@@ -2,7 +2,7 @@ import upath from "upath";
 
 import { BRANCH_PREFIXES } from "./add.constants";
 import type { AddOptions } from "./add.types";
-import { $ } from "bun";
+import { addWorktree, $ } from "./add.shell";
 
 const prefixSet = new Set(BRANCH_PREFIXES);
 
@@ -28,7 +28,7 @@ export async function runWorktreeAdd(path: string, options: AddOptions) {
     if (dryRun) {
       console.log(`Running: git worktree add ${args.join(" ")}`);
     } else {
-      await $`git worktree add ${args}`;
+      await addWorktree(args);
     }
   } catch (error) {
     if (error instanceof $.ShellError) {
