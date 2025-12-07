@@ -2,6 +2,7 @@
 import createCli from "cac";
 
 import { runWorktreeAdd } from "./commands/add";
+import { runWorktreeList } from "./commands/list/list";
 
 const cli = createCli("gw");
 
@@ -17,6 +18,10 @@ cli
   .action(async (path, options) => {
     await runWorktreeAdd(path, options);
   });
+
+cli.command("list", "Get a list of worktrees").action(async (options) => {
+  await runWorktreeList(options);
+});
 
 cli.help();
 cli.version("0.0.0");
