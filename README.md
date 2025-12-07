@@ -39,6 +39,40 @@ gw add ../bugfix -b fix-login-issue
 gw add ../feature/test --dry-run
 ```
 
+### List Command
+
+Display all Git worktrees organized by branch prefix:
+
+```bash
+gw list
+```
+
+**Options:**
+
+- `-n, --dry-run` - Print command without executing it
+
+**Features:**
+
+- Groups worktrees by branch prefix (e.g., `feature/`, `bugfix/`)
+- Highlights current branch with a star (★) indicator
+- Shows path, commit hash, and branch name for each worktree
+- Displays count of worktrees in each group
+- Handles bare repositories and malformed entries
+
+**Example Output:**
+
+```
+Bare 1
+   /path/to/repo (bare)
+
+Feature 2
+ ★ /path/to/feature/login abc1234 feature/login
+   /path/to/feature/signup def5678 feature/signup
+
+Main 1
+   /path/to/main 9876543 main
+```
+
 ## Development
 
 This project uses [Bun](https://bun.sh) as its runtime.
