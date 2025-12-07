@@ -1,8 +1,8 @@
-import { $ } from "bun";
 import pc from "picocolors";
 import startCase from "lodash.startcase";
 import type { ListOptions } from "./list.types";
 import { BRANCH_PREFIXES } from "./list.constants";
+import { getCurrentBranch, getWorktreeList, $ } from "./shell";
 
 const prefixSet = new Set(BRANCH_PREFIXES);
 
@@ -26,9 +26,9 @@ export async function runWorktreeList(options: ListOptions) {
       console.log("Running: git worktree list");
       return;
     }
-    const currentBranch = (await $`git branch --show-current`.text()).trim();
+    const currentBranch = await getCurrentBranch();
     const groups: BranchGroup[] = [];
-    for await (let ln of $`git worktree list`.lines()) {
+    for await (let ln of getWorktreeList()) {
       if (!ln) continue;
       const match = ln.match(
         /^(?<path>.+?)\s+(?<hash>[0-9a-f]+)?\s?(?:\((?<bare>.*)\))?(?:\[(?<branch>.+)\])?$/,

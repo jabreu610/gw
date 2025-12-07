@@ -1,0 +1,2 @@
+[test]
+preload = ["./commands/list/list.preload.test.ts"]
