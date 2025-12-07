@@ -167,4 +167,29 @@ describe("runWorktreeList", () => {
     const unknownIndex = strippedCalls.findIndex((c) => c.includes("Unknown"));
     expect(bareIndex).toBeLessThan(unknownIndex);
   });
+
+  test("lists multiple branches in same category", async () => {
+    mockState.worktreeOutput = [
+      "/path/to/main abc1234 [main]",
+      "/path/to/feature1 def5678 [feature/login]",
+      "/path/to/feature2 abc9012 [feature/signup]",
+      "/path/to/feature3 def3456 [feature/profile]",
+    ];
+    mockState.currentBranch = "main";
+
+    const options: ListOptions = { dryRun: false };
+    const calls: string[] = [];
+    console.log = mock((msg: string) => {
+      calls.push(msg);
+    });
+
+    await runWorktreeList(options);
+
+    const output = calls.map(stripAnsi).join("\n");
+    expect(output).toContain("Feature 3");
+    expect(output).toContain("feature/login");
+    expect(output).toContain("feature/signup");
+    expect(output).toContain("feature/profile");
+    expect(output).toContain("Branches 1");
+  });
 });
