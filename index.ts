@@ -2,7 +2,7 @@
 import createCli from "cac";
 
 import { runWorktreeAdd } from "./commands/add";
-import { runWorktreeList } from "./commands/list/list";
+import { runWorktreeList } from "./commands/list";
 
 const cli = createCli("gw");
 
