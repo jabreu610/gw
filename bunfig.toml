@@ -1,2 +1,2 @@
 [test]
-preload = ["./commands/list/list.preload.test.ts", "./commands/add/add.preload.test.ts", "./commands/remove/remove.preload.test.ts"]
+preload = ["./commands/list/list.preload.ts", "./commands/add/add.preload.ts", "./commands/remove/remove.preload.ts"]

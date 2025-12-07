@@ -1,5 +1,5 @@
 import { describe, expect, test, mock, beforeEach } from "bun:test";
-import { mockState } from "./add.preload.test";
+import { mockState } from "./add.preload";
 import { runWorktreeAdd } from "./add";
 
 describe("runWorktreeAdd error handling", () => {

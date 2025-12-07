@@ -1,6 +1,6 @@
 import { describe, expect, test, mock, beforeEach } from "bun:test";
 // Import preload first to ensure mocks are set up before the module loads
-import { mockState } from "./remove.preload.test";
+import { mockState } from "./remove.preload";
 // Now import the module being tested
 import { runWorktreeRemove } from "./remove";
 
