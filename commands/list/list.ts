@@ -26,6 +26,7 @@ export async function runWorktreeList(options: ListOptions) {
       console.log("Running: git worktree list");
       return;
     }
+    const currentBranch = (await $`git branch --show-current`.text()).trim();
     const groups: BranchGroup[] = [];
     for await (let ln of $`git worktree list`.lines()) {
       if (!ln) continue;
@@ -64,7 +65,9 @@ export async function runWorktreeList(options: ListOptions) {
         if (path && bare) {
           console.log(`${pc.dim(path)} ${pc.blue(bare)}`);
         } else if (path && hash && branch) {
-          console.log(`${pc.dim(path)} ${pc.blue(hash)} ${pc.yellow(branch)}`);
+          console.log(
+            `${pc.dim(path)} ${pc.blue(hash)} ${pc.yellow(`${branch === currentBranch ? "★" : ""}${branch}`)}`,
+          );
         } else {
           console.log(`${raw}`);
         }
