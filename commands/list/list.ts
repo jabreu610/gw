@@ -63,13 +63,17 @@ export async function runWorktreeList(options: ListOptions) {
       for (const line of lines) {
         const { path, bare, hash, branch, raw } = line;
         if (path && bare) {
-          console.log(`${pc.dim(path)} ${pc.blue(bare)}`);
+          console.log(
+            `${pc.yellow(`${branch === currentBranch ? " ★ " : "   "}`)}${pc.dim(path)} ${pc.blue(bare)}`,
+          );
         } else if (path && hash && branch) {
           console.log(
-            `${pc.dim(path)} ${pc.blue(hash)} ${pc.yellow(`${branch === currentBranch ? "★" : ""}${branch}`)}`,
+            `${pc.yellow(`${branch === currentBranch ? " ★ " : "   "}`)}${pc.dim(path)} ${pc.blue(hash)} ${pc.yellow(`${branch}`)}`,
           );
         } else {
-          console.log(`${raw}`);
+          console.log(
+            `${pc.yellow(`${branch === currentBranch ? " ★ " : "   "}`)}${raw}`,
+          );
         }
       }
       console.log("");
