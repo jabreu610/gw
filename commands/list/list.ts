@@ -1,5 +1,6 @@
 import { $ } from "bun";
 import pc from "picocolors";
+import startCase from "lodash.startcase";
 import type { ListOptions } from "./list.types";
 import { BRANCH_PREFIXES } from "./list.constants";
 
@@ -57,7 +58,7 @@ export async function runWorktreeList(options: ListOptions) {
     });
     for (const section of groups) {
       const { name, lines } = section;
-      console.log(`${pc.bold(name)} ${lines.length}`);
+      console.log(`${pc.bold(startCase(name))} ${lines.length}`);
       for (const line of lines) {
         const { path, bare, hash, branch, raw } = line;
         if (path && bare) {
