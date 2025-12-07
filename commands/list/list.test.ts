@@ -13,6 +13,8 @@ describe("runWorktreeList", () => {
     // Reset mock state before each test
     mockState.worktreeOutput = [];
     mockState.currentBranch = "main";
+    mockState.shouldThrowError = false;
+    mockState.errorType = "none";
   });
 
   test("dry run prints command without executing", async () => {
